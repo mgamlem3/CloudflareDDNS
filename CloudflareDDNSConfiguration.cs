@@ -2,12 +2,12 @@ namespace CloudflareDDNS;
 
 public class CloudflareDDNSConfiguration
 {
-	public CloudflareDDNSConfiguration(string cloudflareApiBaseUri, string cloudflareApiToken, int cloudflareTimeoutSeconds, List<string> domains, int updateFrequency, string updateFrequencyUnit) => (CloudflareApiBaseUri, CloudflareApiToken, CloudflareTimeoutSeconds, Domains, UpdateFrequency, UpdateFrequencyUnit) = (cloudflareApiBaseUri, cloudflareApiToken, cloudflareTimeoutSeconds, domains, updateFrequency, updateFrequencyUnit);
+	public CloudflareDDNSConfiguration(string cloudflareApiBaseUri, string cloudflareApiToken, int cloudflareTimeoutSeconds, int updateFrequency, string updateFrequencyUnit, List<string>? domains = null) => (CloudflareApiBaseUri, CloudflareApiToken, CloudflareTimeoutSeconds, Domains, UpdateFrequency, UpdateFrequencyUnit) = (cloudflareApiBaseUri, cloudflareApiToken, cloudflareTimeoutSeconds, domains, updateFrequency, updateFrequencyUnit);
 
 	public string CloudflareApiBaseUri { get; init; }
 	public string CloudflareApiToken { get; init; }
 	public int CloudflareTimeoutSeconds { get; init; }
-	public List<string> Domains { get; set; }
+	public List<string>? Domains { get; set; }
 	public int UpdateFrequency { get; init; }
 	public string UpdateFrequencyUnit { get; init; }
 
@@ -21,7 +21,7 @@ public class CloudflareDDNSConfiguration
 			throw new CloudflareDDNSServiceException("Cloudflare base uri is required");
 		else if (string.IsNullOrWhiteSpace(CloudflareApiToken))
 			throw new CloudflareDDNSServiceException("Cloudflare api token cannot be null");
-		else if (!Domains.Any())
+		else if (Domains is not null && !Domains.Any())
 			throw new CloudflareDDNSServiceException("No domains were provided");
 	}
 
