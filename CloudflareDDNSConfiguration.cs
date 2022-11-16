@@ -2,9 +2,10 @@ namespace CloudflareDDNS;
 
 public class CloudflareDDNSConfiguration
 {
-	public CloudflareDDNSConfiguration(string cloudflareApiBaseUri, string cloudflareApiToken, int cloudflareTimeoutSeconds, int updateFrequency, string updateFrequencyUnit, List<string>? domains = null) => (CloudflareApiBaseUri, CloudflareApiToken, CloudflareTimeoutSeconds, Domains, UpdateFrequency, UpdateFrequencyUnit) = (cloudflareApiBaseUri, cloudflareApiToken, cloudflareTimeoutSeconds, domains, updateFrequency, updateFrequencyUnit);
+	public CloudflareDDNSConfiguration(string cloudflareApiBaseUri, string cloudflareAuthEmail, string cloudflareApiToken, int cloudflareTimeoutSeconds, int updateFrequency, string updateFrequencyUnit, List<string>? domains = null) => (CloudflareApiBaseUri, CloudflareAuthEmail, CloudflareApiToken, CloudflareTimeoutSeconds, Domains, UpdateFrequency, UpdateFrequencyUnit) = (cloudflareApiBaseUri, cloudflareAuthEmail, cloudflareApiToken, cloudflareTimeoutSeconds, domains, updateFrequency, updateFrequencyUnit);
 
 	public string CloudflareApiBaseUri { get; init; }
+	public string CloudflareAuthEmail { get; set; }
 	public string CloudflareApiToken { get; init; }
 	public int CloudflareTimeoutSeconds { get; init; }
 	public List<string>? Domains { get; set; }
