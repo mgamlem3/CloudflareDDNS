@@ -6,7 +6,9 @@ var host = Host.CreateDefaultBuilder(args)
 	{
 		var configuration = hostContext.Configuration;
 		var serviceConfiguration = configuration.GetSection("CloudflareDDNSConfiguration").Get<CloudflareDDNSConfiguration>();
-		var domains = configuration.GetSection("Domains").Get<List<string>>();
+		var domains = configuration
+		.GetSection("Domains")
+		.Get<List<DnsConfiguration>>();
 
 		if (serviceConfiguration is not null && domains is not null)
 		{
