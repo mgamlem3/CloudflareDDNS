@@ -14,6 +14,13 @@ public class CloudlfareApiClient
 		ConfigureHttpClient();
 	}
 
+	/// <summary>
+	/// Make request to Cloudflare api to update DNS record
+	/// </summary>
+	/// <param name="request"></param>
+	/// <param name="ipAddress"></param>
+	/// <returns></returns>
+	/// <exception cref="CloudflareApiClientException"></exception>
 	public async Task<UpdateDnsRecordResponse> UpdateDnsRecord(DnsConfiguration request, string ipAddress)
 	{
 		try
