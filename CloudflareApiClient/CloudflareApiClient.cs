@@ -25,7 +25,6 @@ public class CloudlfareApiClient
 	{
 		try
 		{
-
 			var json = JsonConvert.SerializeObject(new CloudflareDnsRecordRequest(request.Type, request.Name, ipAddress, (uint) request.TTL), s_jsonSerializerSettings);
 			var response = await m_httpClient.PutAsJsonAsync($"/zones/{request.ZoneIdentifier}/dns_records/{request.RecordIdentifier}", json);
 
