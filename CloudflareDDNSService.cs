@@ -1,3 +1,4 @@
+using CloudflareDDNS.CloudlfareApi;
 using System.Net;
 
 namespace CloudflareDDNS;
@@ -8,6 +9,7 @@ public class CloudflareDDNSService : BackgroundService
 	{
 		m_logger = logger;
 		m_configuration = configuration;
+		m_cloudlfareApiClient = new CloudlfareApiClient(configuration, logger);
 	}
 
 	protected override async Task ExecuteAsync(CancellationToken stoppingToken)
@@ -16,8 +18,36 @@ public class CloudflareDDNSService : BackgroundService
 		await Initialize();
 		while (!stoppingToken.IsCancellationRequested)
 		{
-			var ip = await GetPublicIPAddress();
-			m_logger.LogInformation("IP: {ip}", ip);
+			try
+			{
+				var ip = await GetPublicIPAddress();
+
+				if (ip is null)
+					throw new CloudflareDDNSServiceException("Could not get ip address");
+
+				m_logger.LogInformation("{time}", DateTimeOffset.Now);
+				m_logger.LogInformation("IP at: {ip}", ip);
+
+				foreach (var domainConfiguration in m_configuration.Domains)
+				{
+					try
+					{
+						await m_cloudlfareApiClient.UpdateDnsRecord(domainConfiguration, ip.ToString());
+					}
+					catch (CloudflareApiClientException e)
+					{
+						m_logger.LogError("Exception updating DNS record via Cloudflare api: {e}", e);
+					}
+				}
+			}
+			catch (CloudflareDDNSServiceException e)
+			{
+				m_logger.LogError("Exception updating DNS records: {e}", e);
+			}
+			finally
+			{
+				Thread.Sleep(m_configuration.GetUpdateFrequencyTimeSpan());
+			}
 		}
 	}
 
@@ -91,4 +121,5 @@ public class CloudflareDDNSService : BackgroundService
 
 	private readonly ILogger<CloudflareDDNSService> m_logger;
 	private readonly CloudflareDDNSConfiguration m_configuration;
+	private readonly CloudlfareApiClient m_cloudlfareApiClient;
 }
