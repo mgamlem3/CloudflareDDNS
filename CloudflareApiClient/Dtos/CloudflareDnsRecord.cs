@@ -1,4 +1,4 @@
-namespace CloudflareDDNS.CloudlfareApiClient.Dtos;
+namespace CloudflareDDNS.CloudlfareApi.Dtos;
 
 public sealed class CloudflareDnsRecord
 {

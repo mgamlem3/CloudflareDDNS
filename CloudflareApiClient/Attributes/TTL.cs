@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CloudflareDDNS.CloudlfareApiClient.Attributes;
+namespace CloudflareDDNS.CloudlfareApi.Attributes;
 
 public sealed class TTL : ValidationAttribute
 {

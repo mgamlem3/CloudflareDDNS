@@ -1,9 +1,9 @@
-using CloudflareDDNS.CloudlfareApiClient.Dtos;
+using CloudflareDDNS.CloudlfareApi.Dtos;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http.Json;
 
-namespace CloudflareDDNS.CloudlfareApiClient;
+namespace CloudflareDDNS.CloudlfareApi;
 
 public class CloudlfareApiClient
 {

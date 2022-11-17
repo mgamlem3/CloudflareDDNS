@@ -1,4 +1,4 @@
-namespace CloudflareDDNS.CloudlfareApiClient;
+namespace CloudflareDDNS.CloudlfareApi;
 
 public class CloudflareApiClientException : Exception
 {

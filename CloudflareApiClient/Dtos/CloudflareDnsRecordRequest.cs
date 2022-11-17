@@ -1,7 +1,7 @@
-using CloudflareDDNS.CloudlfareApiClient.Attributes;
+using CloudflareDDNS.CloudlfareApi.Attributes;
 using System.ComponentModel.DataAnnotations;
 
-namespace CloudflareDDNS.CloudlfareApiClient.Dtos;
+namespace CloudflareDDNS.CloudlfareApi.Dtos;
 
 public class CloudflareDnsRecordRequest
 {

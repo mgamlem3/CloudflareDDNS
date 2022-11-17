@@ -1,7 +1,7 @@
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
-namespace CloudflareDDNS.CloudlfareApiClient.Attributes;
+namespace CloudflareDDNS.CloudlfareApi.Attributes;
 
 public sealed class IpAddress : ValidationAttribute
 {

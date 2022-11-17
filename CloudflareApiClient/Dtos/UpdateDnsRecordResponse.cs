@@ -1,7 +1,7 @@
 using System.Diagnostics.CodeAnalysis;
 
 
-namespace CloudflareDDNS.CloudlfareApiClient.Dtos;
+namespace CloudflareDDNS.CloudlfareApi.Dtos;
 
 public class UpdateDnsRecordResponse
 {
