@@ -23,6 +23,9 @@ public class CloudlfareApiClient
 	/// <exception cref="CloudflareApiClientException"></exception>
 	public async Task<UpdateDnsRecordResponse> UpdateDnsRecord(DnsConfiguration request, string ipAddress)
 	{
+		if (request is null)
+			throw new ArgumentNullException(nameof(request));
+
 		try
 		{
 			var json = JsonConvert.SerializeObject(new CloudflareDnsRecordRequest(request.Type, request.Name, ipAddress, (uint) request.TTL), s_jsonSerializerSettings);
