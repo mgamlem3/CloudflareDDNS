@@ -9,4 +9,12 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
+      day: "monday"
     target-branch: "main"
+
+  # Maintain dependencies for GitHub Actions
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
