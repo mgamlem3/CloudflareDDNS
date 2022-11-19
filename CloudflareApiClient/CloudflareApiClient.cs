@@ -1,7 +1,8 @@
 using CloudflareDDNS.CloudlfareApi.Dtos;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
-using System.Net.Http.Json;
+using System.Net.Http.Headers;
+using System.Text;
 
 namespace CloudflareDDNS.CloudlfareApi;
 
@@ -28,15 +29,19 @@ public class CloudlfareApiClient
 
 		try
 		{
-			var json = JsonConvert.SerializeObject(new CloudflareDnsRecordRequest(request.Type, request.Name, ipAddress, (uint) request.TTL), s_jsonSerializerSettings);
-			var response = await m_httpClient.PutAsJsonAsync($"/zones/{request.ZoneIdentifier}/dns_records/{request.RecordIdentifier}", json);
+			var json = JsonConvert.SerializeObject(new CloudflareDnsRecordRequest(request.Type, request.Name, ipAddress, (uint) request.TTL, proxied: request.Proxied), s_jsonSerializerSettings);
+			var putRequest = new HttpRequestMessage(HttpMethod.Put, $"zones/{request.ZoneIdentifier}/dns_records/{request.RecordIdentifier}")
+			{
+				Content = new StringContent(json, Encoding.UTF8, new MediaTypeHeaderValue("application/json"))
+			};
+			var response = await m_httpClient.SendAsync(putRequest);
 
 			if (response is null || response.Content is null)
 			{
 				throw new CloudflareApiClientException("Response or response content was null from cloudflare.");
 			}
 
-			var stringafiedResponseContent = response.Content.ToString();
+			var stringafiedResponseContent = await response.Content.ReadAsStringAsync();
 
 			if (string.IsNullOrWhiteSpace(stringafiedResponseContent))
 				return new UpdateDnsRecordResponse() { Success = false, Errors = new string[] { "Response content could not be converted to string" } };
@@ -63,7 +68,7 @@ public class CloudlfareApiClient
 	{
 		m_httpClient.BaseAddress = m_cloudflareDDNSConfiguration.GetCloudflareApiUri();
 		m_httpClient.DefaultRequestHeaders.Add("X-Auth-Email", m_cloudflareDDNSConfiguration.CloudflareAuthEmail);
-		m_httpClient.DefaultRequestHeaders.Add("X-Auth-Key", m_cloudflareDDNSConfiguration.CloudflareApiToken);
+		m_httpClient.DefaultRequestHeaders.Add("X-Auth-Key", m_cloudflareDDNSConfiguration.CloudflareApiKey);
 	}
 
 	private CloudflareDDNSConfiguration m_cloudflareDDNSConfiguration { get; init; }
@@ -75,6 +80,7 @@ public class CloudlfareApiClient
 	};
 	private static readonly JsonSerializerSettings s_jsonSerializerSettings = new()
 	{
-		ContractResolver = s_contractResolver
+		ContractResolver = s_contractResolver,
+		NullValueHandling = NullValueHandling.Ignore
 	};
 }
