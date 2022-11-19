@@ -28,6 +28,9 @@ public class CloudflareDDNSService : BackgroundService
 				m_logger.LogInformation("{time}", DateTimeOffset.Now);
 				m_logger.LogInformation("IP at: {ip}", ip);
 
+				if (m_configuration.Domains is null)
+					throw new CloudflareDDNSServiceException("No domains were found");
+
 				foreach (var domainConfiguration in m_configuration.Domains)
 				{
 					try

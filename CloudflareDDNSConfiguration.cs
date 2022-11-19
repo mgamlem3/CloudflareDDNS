@@ -20,11 +20,17 @@ public class CloudflareDDNSConfiguration
 	public void CheckConfigurationIsValid()
 	{
 		if (string.IsNullOrWhiteSpace(CloudflareApiBaseUri))
+		{
 			throw new CloudflareDDNSServiceException("Cloudflare base uri is required");
+		}
 		else if (string.IsNullOrWhiteSpace(CloudflareApiToken))
+		{
 			throw new CloudflareDDNSServiceException("Cloudflare api token cannot be null");
+		}
 		else if (Domains is null || !Domains.Any())
+		{
 			throw new CloudflareDDNSServiceException("No domains were provided");
+		}
 		else if (Domains.Any(x =>
 		{
 			if (!string.IsNullOrWhiteSpace(x.Name) || !string.IsNullOrWhiteSpace(x.RecordIdentifier) || !string.IsNullOrWhiteSpace(x.Type) || !string.IsNullOrWhiteSpace(x.ZoneIdentifier))
@@ -32,7 +38,9 @@ public class CloudflareDDNSConfiguration
 			else
 				return false;
 		}))
+		{
 			throw new CloudflareDDNSServiceException("Domain information was incomplete");
+		}
 	}
 
 	/// <summary>
