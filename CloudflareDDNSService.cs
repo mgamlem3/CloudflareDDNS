@@ -35,7 +35,12 @@ public class CloudflareDDNSService : BackgroundService
 				{
 					try
 					{
-						await m_cloudlfareApiClient.UpdateDnsRecord(domainConfiguration, ip.ToString());
+						var response = await m_cloudlfareApiClient.UpdateDnsRecord(domainConfiguration, ip.ToString());
+
+						if (response is not null && response.Success)
+							m_logger.LogInformation("Updated {domain} to {ip}", domainConfiguration.Name, ip);
+						else
+							m_logger.LogError("Failed to update {domain}: {e}", domainConfiguration.Name, response?.Errors);
 					}
 					catch (CloudflareApiClientException e)
 					{
