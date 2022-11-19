@@ -24,9 +24,13 @@ This is the endpoint that the service will use. Currently this should Cloudflare
 
 Email associated with auth token
 
-#### CloudflareApiToken
+#### CloudflareApiToken:
 
 Api token that allows access to Cloudflare Api. It must have `#dns_records:edit` permission.
+
+#### CloudflareApiKey:
+
+Sometimes called the "Global API Key" this can be accessed in the Cloudflare portal.
 
 #### CloudflareTimeoutSeconds:
 
@@ -55,6 +59,9 @@ Domain name to add to DNS record
 #### TTL:
 
 Time to live for the DNS record. Cloudflare enforces this as a number between **60** and **86400** or **1** for automatic.
+
+#### Proxied:
+Should this record proxy through Cloudflare? true or false
 
 #### ZoneIdentifier:
 
