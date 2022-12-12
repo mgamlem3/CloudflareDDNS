@@ -26,6 +26,8 @@ public class CloudlfareApiClient
 	{
 		if (request is null)
 			throw new ArgumentNullException(nameof(request));
+		else if (!request.IsValid())
+			throw new CloudflareApiClientException("Request was invalid.");
 
 		try
 		{
@@ -37,9 +39,7 @@ public class CloudlfareApiClient
 			var response = await m_httpClient.SendAsync(putRequest);
 
 			if (response is null || response.Content is null)
-			{
 				throw new CloudflareApiClientException("Response or response content was null from cloudflare.");
-			}
 
 			var stringafiedResponseContent = await response.Content.ReadAsStringAsync();
 
