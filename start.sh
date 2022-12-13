@@ -1,7 +1,7 @@
 docker run \
     -it \
     -d \
-    --rm \
     --network bridge \
     --name CloudflareDDNS \
+    --restart on-failure:3 \
     cloudflare-ddns:latest
