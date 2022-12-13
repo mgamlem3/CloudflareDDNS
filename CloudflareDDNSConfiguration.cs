@@ -2,11 +2,10 @@ namespace CloudflareDDNS;
 
 public class CloudflareDDNSConfiguration
 {
-	public CloudflareDDNSConfiguration(string cloudflareApiBaseUri, string cloudflareAuthEmail, string cloudflareApiToken, string cloudflareApiKey, int cloudflareTimeoutSeconds, int updateFrequency, string updateFrequencyUnit, List<DnsConfiguration>? domains = null) => (CloudflareApiBaseUri, CloudflareAuthEmail, CloudflareApiToken, CloudflareApiKey, CloudflareTimeoutSeconds, Domains, UpdateFrequency, UpdateFrequencyUnit) = (cloudflareApiBaseUri, cloudflareAuthEmail, cloudflareApiToken, cloudflareApiKey, cloudflareTimeoutSeconds, domains, updateFrequency, updateFrequencyUnit);
+	public CloudflareDDNSConfiguration(string cloudflareApiBaseUri, string cloudflareAuthEmail, string cloudflareApiKey, int cloudflareTimeoutSeconds, int updateFrequency, string updateFrequencyUnit, List<DnsConfiguration>? domains = null) => (CloudflareApiBaseUri, CloudflareAuthEmail, CloudflareApiKey, CloudflareTimeoutSeconds, Domains, UpdateFrequency, UpdateFrequencyUnit) = (cloudflareApiBaseUri, cloudflareAuthEmail, cloudflareApiKey, cloudflareTimeoutSeconds, domains, updateFrequency, updateFrequencyUnit);
 
 	public string CloudflareApiBaseUri { get; init; }
 	public string CloudflareAuthEmail { get; set; }
-	public string CloudflareApiToken { get; init; }
 	public string CloudflareApiKey { get; set; }
 	public int CloudflareTimeoutSeconds { get; init; }
 	public List<DnsConfiguration>? Domains { get; set; }
@@ -22,10 +21,6 @@ public class CloudflareDDNSConfiguration
 		if (string.IsNullOrWhiteSpace(CloudflareApiBaseUri))
 		{
 			throw new CloudflareDDNSServiceException("Cloudflare base uri is required");
-		}
-		else if (string.IsNullOrWhiteSpace(CloudflareApiToken))
-		{
-			throw new CloudflareDDNSServiceException("Cloudflare api token cannot be null");
 		}
 		else if (Domains is null || !Domains.Any())
 		{

@@ -24,10 +24,6 @@ This is the endpoint that the service will use. Currently this should Cloudflare
 
 Email associated with auth token
 
-#### CloudflareApiToken:
-
-Api token that allows access to Cloudflare Api. It must have `#dns_records:edit` permission.
-
 #### CloudflareApiKey:
 
 Sometimes called the "Global API Key" this can be accessed in the Cloudflare portal.
