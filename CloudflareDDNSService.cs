@@ -54,7 +54,9 @@ public class CloudflareDDNSService : BackgroundService
 			}
 			finally
 			{
-				Thread.Sleep(m_configuration.GetUpdateFrequencyTimeSpan());
+				var sleepTime = m_configuration.GetUpdateFrequencyTimeSpan();
+				m_logger.LogInformation("Sleeping for {sleepTime}", sleepTime.ToString());
+				Thread.Sleep(sleepTime);
 			}
 		}
 	}
