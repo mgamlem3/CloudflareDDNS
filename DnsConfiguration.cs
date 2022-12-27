@@ -1,3 +1,5 @@
+using Mg3.Utility.StringUtility;
+
 namespace CloudflareDDNS;
 
 public class DnsConfiguration
@@ -15,9 +17,9 @@ public class DnsConfiguration
 			return false;
 		else if (Name is null)
 			return false;
-		else if (string.IsNullOrWhiteSpace(ZoneIdentifier))
+		else if (ZoneIdentifier.IsNullOrWhitespace())
 			return false;
-		else if (string.IsNullOrWhiteSpace(RecordIdentifier))
+		else if (RecordIdentifier.IsNullOrWhitespace())
 			return false;
 		else
 			return true;

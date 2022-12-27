@@ -1,4 +1,5 @@
 using CloudflareDDNS.CloudlfareApi;
+using Mg3.Utility.StringUtility;
 using System.Net;
 
 namespace CloudflareDDNS;
@@ -114,7 +115,7 @@ public class CloudflareDDNSService : BackgroundService
 			var ipString = await response.Content.
 			ReadAsStringAsync();
 
-			if (!string.IsNullOrWhiteSpace(ipString))
+			if (!ipString.IsNullOrWhitespace())
 				return IPAddress.Parse(ipString);
 		}
 		catch (HttpRequestException e)

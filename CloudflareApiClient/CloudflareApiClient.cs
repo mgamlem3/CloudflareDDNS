@@ -1,4 +1,5 @@
 using CloudflareDDNS.CloudlfareApi.Dtos;
+using Mg3.Utility.StringUtility;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using System.Net.Http.Headers;
@@ -43,7 +44,7 @@ public class CloudlfareApiClient
 
 			var stringafiedResponseContent = await response.Content.ReadAsStringAsync();
 
-			if (string.IsNullOrWhiteSpace(stringafiedResponseContent))
+			if (stringafiedResponseContent.IsNullOrWhitespace())
 				return new UpdateDnsRecordResponse() { Success = false, Errors = new string[] { "Response content could not be converted to string" } };
 
 			var deserializedResponse = JsonConvert.DeserializeObject<UpdateDnsRecordResponse>(stringafiedResponseContent);

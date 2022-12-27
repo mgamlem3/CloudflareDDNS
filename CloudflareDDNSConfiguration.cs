@@ -1,3 +1,5 @@
+using Mg3.Utility.StringUtility;
+
 namespace CloudflareDDNS;
 
 public class CloudflareDDNSConfiguration
@@ -18,7 +20,7 @@ public class CloudflareDDNSConfiguration
 	/// <exception cref="CloudflareDDNSServiceException">Thrown when value is missing. Contains details of missing value</exception>
 	public void CheckConfigurationIsValid()
 	{
-		if (string.IsNullOrWhiteSpace(CloudflareApiBaseUri))
+		if (CloudflareApiBaseUri.IsNullOrWhitespace())
 		{
 			throw new CloudflareDDNSServiceException("Cloudflare base uri is required");
 		}
@@ -28,7 +30,7 @@ public class CloudflareDDNSConfiguration
 		}
 		else if (Domains.Any(x =>
 		{
-			if (!string.IsNullOrWhiteSpace(x.Name) || !string.IsNullOrWhiteSpace(x.RecordIdentifier) || !string.IsNullOrWhiteSpace(x.Type) || !string.IsNullOrWhiteSpace(x.ZoneIdentifier))
+			if (!x.Name.IsNullOrWhitespace() || !x.RecordIdentifier.IsNullOrWhitespace() || !x.Type.IsNullOrWhitespace() || !x.ZoneIdentifier.IsNullOrWhitespace())
 				return true;
 			else
 				return false;

@@ -1,3 +1,4 @@
+using Mg3.Utility.StringUtility;
 using System.ComponentModel.DataAnnotations;
 using System.Text.RegularExpressions;
 
@@ -12,7 +13,7 @@ public sealed class IpAddress : ValidationAttribute
 
 		var objectInstance = (string) validationContext.ObjectInstance;
 
-		if (string.IsNullOrWhiteSpace(objectInstance))
+		if (objectInstance.IsNullOrWhitespace())
 			return new ValidationResult("Unable to get object instance");
 		else if (!Regex.IsMatch(objectInstance, c_ipPattern, RegexOptions.CultureInvariant, new TimeSpan(0, 0, 1)))
 			return new ValidationResult("Not a valid IP address");
