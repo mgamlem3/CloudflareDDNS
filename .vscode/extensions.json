@@ -1,0 +1,8 @@
+{
+	"recommendations": [
+		"ms-dotnettools.csharp",
+		"GitHub.vscode-pull-request-github",
+		"streetsidesoftware.code-spell-checker",
+		"ms-azuretools.vscode-docker"
+	]
+}
