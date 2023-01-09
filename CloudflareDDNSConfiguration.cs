@@ -15,7 +15,7 @@ public class CloudflareDDNSConfiguration
 	public string UpdateFrequencyUnit { get; init; }
 
 	/// <summary>
-	/// Checks to see if required configuation values are present
+	/// Checks to see if required configuration values are present
 	/// </summary>
 	/// <exception cref="CloudflareDDNSServiceException">Thrown when value is missing. Contains details of missing value</exception>
 	public void CheckConfigurationIsValid()
@@ -47,7 +47,7 @@ public class CloudflareDDNSConfiguration
 	public Uri GetCloudflareApiUri() => new(CloudflareApiBaseUri);
 
 	/// <summary>
-	/// Get TimeSpan to represent update frequency desired. Will return default 1 hour if no timespan unit was specified in config
+	/// Get TimeSpan to represent update frequency desired. Will return default 1 hour if no time span unit was specified in config
 	/// </summary>
 	/// <returns>TimeSpan</returns>
 	public TimeSpan GetUpdateFrequencyTimeSpan() => UpdateFrequencyUnit.ToUpperInvariant() switch
