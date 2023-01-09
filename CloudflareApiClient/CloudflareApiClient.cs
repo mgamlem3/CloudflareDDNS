@@ -45,12 +45,12 @@ public class CloudlfareApiClient
 			var stringafiedResponseContent = await response.Content.ReadAsStringAsync();
 
 			if (stringafiedResponseContent.IsNullOrWhitespace())
-				return new UpdateDnsRecordResponse() { Success = false, Errors = new string[] { "Response content could not be converted to string" } };
+				return new UpdateDnsRecordResponse() { Success = false, Errors = new[] { "Response content could not be converted to string" } };
 
 			var deserializedResponse = JsonConvert.DeserializeObject<UpdateDnsRecordResponse>(stringafiedResponseContent);
 
 			if (deserializedResponse is null)
-				return new UpdateDnsRecordResponse() { Success = false, Errors = new string[] { "Unable to deserialize response content" } };
+				return new UpdateDnsRecordResponse() { Success = false, Errors = new[] { "Unable to deserialize response content" } };
 
 			return deserializedResponse;
 		}
