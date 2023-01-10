@@ -33,7 +33,7 @@ public sealed class IpAddress : ValidationAttribute
 		}
 		if (ipSegments.Any(x =>
 		{
-			var num = int.Parse(x.Trim('.'));
+			_ = int.TryParse(x.Trim('.'), out var num);
 			if (num <= 255)
 				return true;
 
