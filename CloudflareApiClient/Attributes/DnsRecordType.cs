@@ -15,7 +15,7 @@ public sealed class DnsRecordType : ValidationAttribute
 
 		if (match)
 			return ValidationResult.Success;
-		else
-			return new ValidationResult("Not a valid DNS record type");
+
+		return new ValidationResult("Not a valid DNS record type");
 	}
 }
