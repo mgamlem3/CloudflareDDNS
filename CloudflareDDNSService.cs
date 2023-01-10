@@ -16,12 +16,12 @@ public class CloudflareDDNSService : BackgroundService
 	protected override async Task ExecuteAsync(CancellationToken stoppingToken)
 	{
 		m_logger.LogInformation("Worker started at: {time}", DateTimeOffset.Now);
-		await Initialize();
+		await InitializeAsync();
 		while (!stoppingToken.IsCancellationRequested)
 		{
 			try
 			{
-				var ip = await GetPublicIPAddress();
+				var ip = await GetPublicIPAddressAsync();
 
 				if (ip is null)
 					throw new CloudflareDDNSServiceException("Could not get ip address");
@@ -36,7 +36,7 @@ public class CloudflareDDNSService : BackgroundService
 				{
 					try
 					{
-						var response = await m_cloudlfareApiClient.UpdateDnsRecord(domainConfiguration, ip.ToString());
+						var response = await m_cloudlfareApiClient.UpdateDnsRecordAsync(domainConfiguration, ip.ToString());
 
 						if (response is not null && response.Success)
 							m_logger.LogInformation("Updated {domain} to {ip}", domainConfiguration.Name, ip);
@@ -62,14 +62,14 @@ public class CloudflareDDNSService : BackgroundService
 		}
 	}
 
-	private async Task Initialize()
+	private async Task InitializeAsync()
 	{
 		m_logger.LogInformation("Initializing service...");
 
 		try
 		{
 			m_configuration.CheckConfigurationIsValid();
-			await CloudflareIsReachable();
+			await CloudflareIsReachableAsync();
 		}
 		catch (CloudflareDDNSServiceException e)
 		{
@@ -82,7 +82,7 @@ public class CloudflareDDNSService : BackgroundService
 	/// </summary>
 	/// <returns>true if reachable, false otherwise</returns>
 	/// <exception cref="CloudflareDDNSServiceException">Thrown when failure status code is returned from HttpClient request</exception>
-	private async Task<bool> CloudflareIsReachable()
+	private async Task<bool> CloudflareIsReachableAsync()
 	{
 		try
 		{
@@ -106,7 +106,7 @@ public class CloudflareDDNSService : BackgroundService
 	/// Get public ip from where service is running
 	/// </summary>
 	/// <returns>IPAddress if found, null otherwise</returns>
-	private async Task<IPAddress?> GetPublicIPAddress()
+	private async Task<IPAddress?> GetPublicIPAddressAsync()
 	{
 		try
 		{

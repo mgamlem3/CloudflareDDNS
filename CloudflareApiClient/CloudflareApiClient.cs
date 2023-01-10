@@ -23,7 +23,7 @@ public class CloudlfareApiClient
 	/// <param name="ipAddress"></param>
 	/// <returns></returns>
 	/// <exception cref="CloudflareApiClientException"></exception>
-	public async Task<UpdateDnsRecordResponse> UpdateDnsRecord(DnsConfiguration request, string ipAddress)
+	public async Task<UpdateDnsRecordResponse> UpdateDnsRecordAsync(DnsConfiguration request, string ipAddress)
 	{
 		if (request is null)
 			throw new ArgumentNullException(nameof(request));
