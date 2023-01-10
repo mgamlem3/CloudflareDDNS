@@ -17,7 +17,7 @@ var host = Host.CreateDefaultBuilder(args)
 		}
 		else
 		{
-			throw new Exception("Configuration cannot be null");
+			throw new ArgumentNullException(nameof(configuration), "Configuration cannot be null");
 		}
 
 		services.AddHostedService<CloudflareDDNSService>();
