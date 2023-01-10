@@ -32,8 +32,8 @@ public class CloudflareDDNSConfiguration
 		{
 			if (!x.Name.IsNullOrWhitespace() || !x.RecordIdentifier.IsNullOrWhitespace() || !x.Type.IsNullOrWhitespace() || !x.ZoneIdentifier.IsNullOrWhitespace())
 				return true;
-			else
-				return false;
+
+			return false;
 		}))
 		{
 			throw new CloudflareDDNSServiceException("Domain information was incomplete");

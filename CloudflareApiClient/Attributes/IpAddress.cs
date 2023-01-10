@@ -15,12 +15,12 @@ public sealed class IpAddress : ValidationAttribute
 
 		if (objectInstance.IsNullOrWhitespace())
 			return new ValidationResult("Unable to get object instance");
-		else if (!Regex.IsMatch(objectInstance, c_ipPattern, RegexOptions.CultureInvariant, new TimeSpan(0, 0, 1)))
+		if (!Regex.IsMatch(objectInstance, c_ipPattern, RegexOptions.CultureInvariant, new TimeSpan(0, 0, 1)))
 			return new ValidationResult("Not a valid IP address");
-		else if (!IpAddressHasValidSegments(objectInstance))
+		if (!IpAddressHasValidSegments(objectInstance))
 			return new ValidationResult("IP Address is not valid");
-		else
-			return ValidationResult.Success;
+
+		return ValidationResult.Success;
 	}
 
 	private static bool IpAddressHasValidSegments(string ipAddress)
@@ -36,16 +36,14 @@ public sealed class IpAddress : ValidationAttribute
 			var num = int.Parse(x.Trim('.'));
 			if (num <= 255)
 				return true;
-			else
-				return false;
+
+			return false;
 		}))
 		{
 			return false;
 		}
-		else
-		{
-			return true;
-		}
+
+		return true;
 	}
 
 	private const string c_ipPattern = @"([\d]{1,3}[.]){3}\d";

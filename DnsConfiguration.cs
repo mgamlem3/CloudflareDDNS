@@ -15,13 +15,13 @@ public class DnsConfiguration
 	{
 		if (Type is null)
 			return false;
-		else if (Name is null)
+		if (Name is null)
 			return false;
-		else if (ZoneIdentifier.IsNullOrWhitespace())
+		if (ZoneIdentifier.IsNullOrWhitespace())
 			return false;
-		else if (RecordIdentifier.IsNullOrWhitespace())
+		if (RecordIdentifier.IsNullOrWhitespace())
 			return false;
-		else
-			return true;
+
+		return true;
 	}
 }

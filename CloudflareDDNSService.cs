@@ -91,8 +91,8 @@ public class CloudflareDDNSService : BackgroundService
 
 			if (response.IsSuccessStatusCode)
 				return true;
-			else
-				throw new CloudflareDDNSServiceException("Failed to connect to CloudflareApi");
+			
+			throw new CloudflareDDNSServiceException("Failed to connect to CloudflareApi");
 		}
 		catch (HttpRequestException e)
 		{

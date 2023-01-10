@@ -13,9 +13,9 @@ public sealed class TTL : ValidationAttribute
 
 		if (objectInstance == 1)
 			return ValidationResult.Success;
-		else if ((60 <= objectInstance) && (objectInstance <= 86400))
+		if ((60 <= objectInstance) && (objectInstance <= 86400))
 			return ValidationResult.Success;
-		else
-			return new ValidationResult("Must be 1 or between 60 and 86400");
+
+		return new ValidationResult("Must be 1 or between 60 and 86400");
 	}
 }
