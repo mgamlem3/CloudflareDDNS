@@ -10,10 +10,6 @@ Below are the details of the JSON configuration object for the project. All conf
 
 This is the endpoint that the service will use. Currently this should Cloudflare API v4.
 
-### **CloudflareAuthEmail:**
-
-Email associated with the API key
-
 ### **CloudflareApiKey:**
 
 This can be created in the Cloudflare portal. It must have the **DNS:Edit** permission.

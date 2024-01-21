@@ -8,10 +8,6 @@ There are only a few values that you must change or add to run this project. Tho
 
 Make sure you update these values so that the application can talk to Cloudflare
 
-### CloudflareAuthEmail
-
-Enter the email associated with your API Token here.
-
 ### CloudflareApiKey
 
 This is where your API token from earlier is entered.
