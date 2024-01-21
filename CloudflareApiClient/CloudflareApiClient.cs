@@ -68,8 +68,7 @@ public class CloudlfareApiClient
 	private void ConfigureHttpClient()
 	{
 		m_httpClient.BaseAddress = m_cloudflareDDNSConfiguration.GetCloudflareApiUri();
-		m_httpClient.DefaultRequestHeaders.Add("X-Auth-Email", m_cloudflareDDNSConfiguration.CloudflareAuthEmail);
-		m_httpClient.DefaultRequestHeaders.Add("X-Auth-Key", m_cloudflareDDNSConfiguration.CloudflareApiKey);
+		m_httpClient.DefaultRequestHeaders.Add("Authorization", $"Bearer {m_cloudflareDDNSConfiguration.CloudflareApiKey}");
 	}
 
 	private CloudflareDDNSConfiguration m_cloudflareDDNSConfiguration { get; init; }
