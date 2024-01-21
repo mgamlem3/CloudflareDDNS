@@ -57,7 +57,7 @@ public class CloudlfareApiClient
 		catch (Exception e)
 		{
 			if (e is HttpRequestException || e is CloudflareApiClientException)
-				m_logger.LogError("Error updating DNS record: ", e);
+				m_logger.LogError("Error updating DNS record: {e}", e);
 			else
 				throw;
 		}

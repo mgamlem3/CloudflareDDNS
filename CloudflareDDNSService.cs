@@ -73,7 +73,7 @@ public class CloudflareDDNSService : BackgroundService
 		}
 		catch (CloudflareDDNSServiceException e)
 		{
-			m_logger.LogError("Unable to initialize service: ", e);
+			m_logger.LogError("Unable to initialize service: {e}", e);
 		}
 	}
 
@@ -96,7 +96,7 @@ public class CloudflareDDNSService : BackgroundService
 		}
 		catch (HttpRequestException e)
 		{
-			m_logger.LogError("Error checking Cloudflare reachability: ", e);
+			m_logger.LogError("Error checking Cloudflare reachability: {e}", e);
 		}
 
 		return false;
@@ -120,11 +120,11 @@ public class CloudflareDDNSService : BackgroundService
 		}
 		catch (HttpRequestException e)
 		{
-			m_logger.LogError("Error fetching IPAddress: ", e);
+			m_logger.LogError("Error fetching IPAddress: {e}", e);
 		}
 		catch (FormatException e)
 		{
-			m_logger.LogError("FormatException while trying to format IPAddress: ", e);
+			m_logger.LogError("FormatException while trying to format IPAddress: {e}", e);
 		}
 
 		return null;
